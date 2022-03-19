@@ -40,8 +40,8 @@ app.post("/",function(req,res){
     }
     const request = https.request(url,options,function(response){
         response.on("data", function(data){
-            // console.log(JSON.parse(data));
-            // console.log(response.statusCode);
+            console.log(JSON.parse(data));
+            console.log(response.statusCode);
             if (response.statusCode===200){
                 //console.log("yay!");
                 res.sendFile(__dirname+"/success.html");
@@ -55,13 +55,10 @@ app.post("/",function(req,res){
     request.end();
 })
 
-app.listen(3000, function(){
-    console.log("Server is running on 3000");
+app.post("/failure", function(req, res){
+    res.redirect("/");
 })
 
-
-//API key 
-// 0bae344b818b7e92bbedeafa301fc02c-us14
-
-// Audience id or list id
-// d0ab4fb927
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Server is running on 3000");
+})
